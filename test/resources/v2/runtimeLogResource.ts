@@ -35,7 +35,7 @@ describe("RuntimeLogResource", () => {
 	var httpRequest : HttpRequest = new HttpRequest();
 	
 	
-	it("should get data about given bus", (done) =>{
+	it("should show the database log", (done) =>{
 		var current: string;
 		var notExpected: string = "error";
 		
