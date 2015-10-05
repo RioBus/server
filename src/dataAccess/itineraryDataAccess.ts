@@ -25,13 +25,9 @@ class ItineraryHeaderMap implements IModelMap {
  */
 class ItineraryDataAccess implements IDataAccess{
     
-    private logger: Logger;
-    private db: DbContext;
     private collection: ICollection<Itinerary>;
 
-    public constructor(){
-        this.logger = Factory.getLogger();
-        this.db = database;
+    public constructor(private db: DbContext = database) {
         this.collection = this.db.collection<Itinerary>(new ItineraryModelMap());
     }
 
@@ -49,7 +45,7 @@ class ItineraryDataAccess implements IDataAccess{
      * @param {string} line
      * @return {Itinerary}
      */
-    private getItinerary(line: string): Itinerary{
+    private getItinerary(line: string): Itinerary {
 		return this.collection.findOne({line: line});    
     }
 
@@ -71,16 +67,16 @@ class ItineraryDataAccess implements IDataAccess{
 	/**
 	 * Not implemented.
 	 */
-	public update(...args: any[]): any {}
+	public update(): void {}
 	
 	/**
 	 * Not implemented.
 	 */
-	public delete(...args: any[]): any {}
+	public delete(): void {}
 	
 	/**
 	 * Not implemented.
 	 */
-    public create(...args: any[]): any {}
+    public create(): void {}
 }
 export = ItineraryDataAccess;

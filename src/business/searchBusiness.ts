@@ -11,7 +11,8 @@ declare var Config;
  */
 class SearchBusiness implements IBusiness {
 	
-	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess")) {}
+	public constructor(private context: IDataAccess = $inject("dataAccess/searchDataAccess"),
+		private max: number = Config.maxSearchItems) {}
 	
 	/**
 	 * Retrieves the Bus data for a given line
@@ -20,9 +21,9 @@ class SearchBusiness implements IBusiness {
 	 * @param {boolean} mustLimit
 	 * @return {Bus[]}
 	 */
-	public retrieve(userAgent: string, data?: string[], mustLimit?: boolean): Bus[] {
+	public retrieve(data?: string[], mustLimit?: boolean): Bus[] {
 		if(data!==undefined){
-			var max: number = Config.maxSearchItems;
+			var max: number = this.max;
 			if(data.length>max && mustLimit){
 				data = data.slice(0, max);
 			}

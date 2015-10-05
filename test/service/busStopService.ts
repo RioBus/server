@@ -1,27 +1,29 @@
-declare var require, describe, it, global;
+declare var require, describe, it, before;
 import BusStopService  = require("../../src/service/busStopService");
 import IService        = require("../../src/service/iService");
 import BusStop         = require("../../src/domain/entity/busStop");
 import IBusiness       = require("../../src/business/iBusiness");
 
-
 var Assert = require("assert");
 
 class MockedBusiness implements IBusiness{
-	public create  (data: any): string { return data; }
-	public retrieve(data: any): string { return data; }
-	public update  (data: any): string { return data; }
-	public delete  (data: any): string { return data; }	
+	public create  (): void {}
+	public retrieve(data: any): any { return data; }
+	public update  (): void {}
+	public delete  (): void {}	
 }
 
-describe("BusStopservice", () => {
+var service: IService;
+
+describe("BusStopService", () => {
 	
-	var busService : IService = new BusStopService(new MockedBusiness());
-	var bus : BusStop = new BusStop("line", "description", "agency", []);
-		
-	it("should return a BusStop object given a line", (done) => {
-		var current: boolean =  busService.retrieve(bus) instanceof BusStop;
-		var expected: boolean = true;
+	before(()=> {
+		service = new BusStopService(new MockedBusiness());
+	});
+	
+	it("should pass on the data without any alteration", (done) => {
+		var expected: string = "retrievable content";
+		var current: string = service.retrieve(expected);
 		Assert.equal(current, expected);
 		done();
 	});

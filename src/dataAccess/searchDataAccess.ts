@@ -17,9 +17,9 @@ class SearchDataAccess implements IDataAccess {
 	private collectionBus: ICollection<Bus>;
 	private collectionItinerary: ICollection<Itinerary>;
 	
-	public constructor() {
-		this.collectionBus = database.collection<Bus>(new BusModelMap());
-		this.collectionItinerary = database.collection<Itinerary>(new ItineraryModelMap());
+	public constructor(db: DbContext = database) {
+		this.collectionBus = db.collection<Bus>(new BusModelMap());
+		this.collectionItinerary = db.collection<Itinerary>(new ItineraryModelMap());
 	}
 
     /**

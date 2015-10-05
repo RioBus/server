@@ -72,7 +72,6 @@ class MongoCollection<T> implements ICollection<T>{
 		var find: any = Sync.promise(this.context, this.context.find, query);
 		var data: Array<any> = Sync.promise(find, find.toArray);
 		var list: T[] = new Array<T>();
-		console.log(query, data.length);
 		data.forEach((obj) => { list.push(this.getData(obj)); }, this);
 		return list;
 	}

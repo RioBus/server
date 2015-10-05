@@ -3,7 +3,7 @@ import IDataAccess = require("../dataAccess/iDataAccess");
 import LogType	   = require("../common/logType");
 import $inject 	   = require("../core/inject");
 
-declare var Config: any;
+declare var Config;
 
 /**
  * Log access business logics
@@ -11,7 +11,8 @@ declare var Config: any;
  */
 class LogBusiness implements IBusiness {
 	
-	public constructor(private context: IDataAccess = $inject("dataAccess/logDataAccess")) {}
+	public constructor(private context: IDataAccess = $inject("dataAccess/logDataAccess"),
+		private logConfig: any = Config.log) {}
 	
 	/**
 	 * Retrieves the logs of a given type
@@ -35,9 +36,9 @@ class LogBusiness implements IBusiness {
 	 */
 	private getLogFilePath(logType: number): string {
 		switch(logType) {
-			case LogType.DATA_PROVIDER: return Config.log.dataProvider;
-			case LogType.SERVER: return Config.log.server;
-			case LogType.RUNTIME: default: return Config.log.runtime;
+			case LogType.DATA_PROVIDER: return this.logConfig.dataProvider;
+			case LogType.SERVER: return this.logConfig.server;
+			case LogType.RUNTIME: default: return this.logConfig.runtime;
 		}
 	}
 	

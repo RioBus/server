@@ -14,52 +14,37 @@ declare var Config: any, database: DbContext;
  * Does operations over BusStop data
  * @class BusStopDataAccess
  */
-class BusStopDataAccess implements IDataAccess{
+class BusStopDataAccess implements IDataAccess {
     
-    private logger: Logger;
     private db: DbContext;
     private collection: ICollection<BusStop>;
 
-    public constructor(){
-        this.logger = Factory.getLogger();
-        this.db = database;
-        this.collection = this.db.collection<BusStop>(new BusStopModelMap());
+    public constructor(db: DbContext = database) {
+        this.collection = db.collection<BusStop>(new BusStopModelMap());
     }
 
     /**
-     * Retrieves the BusStop data.
-     * @param {string} line 
+     * Retrieves the BusStop instance given a line.
+     * @param {string} line - Line identifier
      * @return {BusStop}
      */
-	public retrieve(data: string): BusStop{
-        return this.getBusStop(data);
-    }
-
-    /**
-     * Retrieves the BusStop spots given a line
-     * @param {string} line
-     * @return {BusStop}
-     */
-    private getBusStop(line: string): BusStop{
-		//var aux = this.collection.find({line: line});
-        //return aux[0];
+	public retrieve(line: string): BusStop {
         return this.collection.findOne({line: line});
     }
 
+	/**
+	 * Not implemented.
+	 */
+	public update(): void {}
 	
 	/**
 	 * Not implemented.
 	 */
-	public update(...args: any[]): any {}
+	public delete(): void {}
 	
 	/**
 	 * Not implemented.
 	 */
-	public delete(...args: any[]): any {}
-	
-	/**
-	 * Not implemented.
-	 */
-    public create(...args: any[]): any {}
+    public create(): void {}
 }
 export = BusStopDataAccess;

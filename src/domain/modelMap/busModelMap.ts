@@ -32,7 +32,7 @@ class BusModelMap implements IModelMap {
 			data.direction = (data.direction!=="")? parseInt(data.direction) : 0;
 		}
 		if(data.sense!==undefined) data.sense = data.sense.toString();
-		if(data.timestamp!==undefined) data.timestamp = Moment.tz(data.timestamp, "America/Sao_Paulo").format();
+		if(data.timeStamp!==undefined) data.timeStamp = Moment.tz(data.timeStamp, "America/Sao_Paulo").format();
 		if(data.latitude!==undefined && data.longitude!==undefined){
 			data.coordinates = [parseFloat(data.latitude), parseFloat(data.longitude)]; 
 		}
@@ -47,7 +47,7 @@ class BusModelMap implements IModelMap {
 	 * @return {Bus}
 	 */
 	public getInstance<T>(data: any): Bus {
-		return new Bus(data.line, data.order, data.speed, data.direction, data.coordinates[0], data.coordinates[1], data.timestamp, data.sense);
+		return new Bus(data.line, data.order, data.speed, data.direction, data.coordinates[0], data.coordinates[1], data.timeStamp, data.sense);
 	}
 }
 export = BusModelMap;

@@ -4,7 +4,7 @@ import IService  = require("./iService");
 import Strings   = require("../strings");
 import $inject 	 = require("../core/inject");
 
-declare var analytics: Analytics, strings: Strings;
+declare var globalAnalytics: Analytics, strings: Strings;
 
 /**
  * Responsible for integrating the outside's requests for Buses with the business logics
@@ -12,11 +12,10 @@ declare var analytics: Analytics, strings: Strings;
  */
 class SearchService implements IService {
 	
-	private analytics: Analytics;
-	
-	public constructor(private context: IBusiness = $inject("business/searchBusiness"), private mustLimit: boolean = true) {
-		this.analytics = analytics;
-	}
+	public constructor(private business: IBusiness = $inject("business/searchBusiness"), private mustLimit?: boolean, private analytics?: Analytics) {
+			if(!this.mustLimit) this.mustLimit = true;
+			if(!this.analytics) this.analytics = globalAnalytics;
+		}
 	
 	/**
 	 * Gets the Buses given a line or a list of, a bus order or a list of. If the search
@@ -26,15 +25,15 @@ class SearchService implements IService {
 	 * @return {Bus[]}
 	 */
 	public retrieve(userAgent: string, line?: string): any {
-		if(line===undefined) return this.context.retrieve(userAgent);
+		if(line===undefined) return this.business.retrieve();
 		else {
-			var flag: any = Strings.analytics;
 			var data: string[] = this.processData(line);
+			var flag: any = Strings.analytics;
 			this.analytics.trackEvent(flag.event.restHit, flag.label.rest, userAgent, (error, response)=>{});
 			data.forEach((line)=>{
 				this.analytics.trackEvent(flag.event.restHit, flag.label.busCode, line, (error, response)=>{});
 			}, this);
-			return this.context.retrieve(userAgent, data, this.mustLimit);
+			return this.business.retrieve(data, this.mustLimit);
 		}
 	}
 	

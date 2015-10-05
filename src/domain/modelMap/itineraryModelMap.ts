@@ -14,7 +14,9 @@ class ItineraryModelMap implements IModelMap {
 	 * Configures the collection before doing operations
 	 * @return {void}
 	 */
-	public preConfig(collection: ICollection<Itinerary>): void {}
+	public preConfig(collection: ICollection<Itinerary>): void {
+		collection.createIndex({"keywords": "text"});
+	}
 	
 	/**
 	 * Prepares the data used for querying in the database to be used, forcing the fields types
