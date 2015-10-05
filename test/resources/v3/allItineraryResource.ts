@@ -15,7 +15,7 @@ class MockAnalytics extends Analytics{
 }
 
 declare var globalAnalytics: Analytics;
-describe("ItineraryResource", () => {
+describe("AllItineraryResource", () => {
 	 
 	var ip : string = "0.0.0.0";
 	var port: string = "8085";
