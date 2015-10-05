@@ -17,11 +17,12 @@ class MockAnalytics extends Analytics{
 declare var globalAnalytics: Analytics;
 describe("ServerLogResource", () => {
 	 
+    var lines: string = "10";
 	var ip : string = "0.0.0.0";
 	var port: string = "8084";
 	var route : string ="/v2/log/server/:lines";
 	var resources : Object = {"resources/v2/serverLogResource":route};
-	var address: string = "http://"+ip+":"+port+"/v2/log/server/";
+	var address: string = "http://"+ip+":"+port+"/v2/log/server/lines";
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 
