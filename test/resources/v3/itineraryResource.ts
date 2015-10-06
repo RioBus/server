@@ -22,7 +22,7 @@ describe("ItineraryResource", () => {
 	var port: string = "8088";
 	var route : string ="/v3/itinerary/:line";
 	var resources : Object = {"resources/v3/itineraryResource":route};
-	var address: string = "http://"+ip+":"+port+"/v3/itinerary/line";
+	var address: string = "http://"+ip+":"+port+"/v3/itinerary/" + line;
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 

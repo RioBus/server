@@ -22,7 +22,7 @@ describe("RuntimeLogResource", () => {
 	var port: string = "8082";
 	var route : string ="/v2/log/runtime/:lines";
 	var resources : Object = {"resources/v2/runtimeLogResource":route};
-	var address: string = "http://"+ip+":"+port+"/v2/log/runtime/lines";
+	var address: string = "http://"+ip+":"+port+"/v2/log/runtime/" + lines;
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 

@@ -22,7 +22,7 @@ describe("BusStopResource", () => {
 	var port: string = "8089";
 	var route : string ="/v3/busstop/:line";
 	var resources : Object = {"resources/v3/busStopResource":route};
-	var address: string = "http://"+ip+":"+port+"/v3/busstop/line";
+	var address: string = "http://"+ip+":"+port+"/v3/busstop/" + line;
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 

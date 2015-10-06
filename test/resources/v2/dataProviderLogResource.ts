@@ -22,7 +22,7 @@ describe("DataProviderLogResource", () => {
 	var port: string = "8099";
 	var route : string ="/v2/log/dataprovider/:lines";
 	var resources : Object = {"resources/v2/dataProviderLogResource":route};
-	var address: string = "http://"+ip+":"+port+"/v2/log/dataprovider/lines";
+	var address: string = "http://"+ip+":"+port+"/v2/log/dataprovider/" + lines;
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 

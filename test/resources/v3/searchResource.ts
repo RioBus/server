@@ -22,7 +22,7 @@ describe("SearchResource", () => {
 	var port: string = "8092";
 	var route : string ="/v3/search/:data";
 	var resources : Object = {"resources/v3/searchResource":route};
-	var address: string = "http://"+ip+":"+port+"/v3/search/data";
+	var address: string = "http://"+ip+":"+port+"/v3/search/" + data;
 	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
 
 
