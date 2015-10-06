@@ -4,10 +4,10 @@ import $inject   = require("../../core/inject");
 
 declare var Strings;
 /**
- * ItineraryResource class
+ * SearchResource class
  *
  * Defines a Resource and it's characteristics
- * @class ItineraryResource
+ * @class SearchResource
  */
 class SearchResource implements IResource{
     
