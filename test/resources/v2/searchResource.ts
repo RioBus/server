@@ -1,10 +1,12 @@
-declare var require, describe, it, global;
+declare var require, describe, it, global, before;
 import DbContext        = require("../../../src/core/database/dbContext");
 import HttpRequest      = require("../../../src/core/httpRequest");
 import Router           = require("../../../src/core/router");
 import Config		 	= require("../../../src/config");
 import Analytics        = require("../../../src/common/analytics");
-
+import Bus              = require("../../../src/domain/entity/bus")
+import ICollection		 = require("../../../src/core/database/iCollection");
+import BusModelMap		 = require("../../../src/domain/modelMap/busModelMap");
 var Assert = require("assert");
 
 
@@ -16,15 +18,33 @@ class MockAnalytics extends Analytics{
 
 declare var globalAnalytics: Analytics;
 describe("SearchResource", () => {
+	
+	var db: DbContext;
+	
+	
+	before(() =>{
+			db  = new DbContext(Config.environment.database);
+			var busColletion: ICollection<Bus> = db.collection<Bus>(new BusModelMap());
+	
+			var busOne: Bus = new Bus("565", "111", 0, 0, 0, 0, (new Date()).toISOString(), "0");
+			var busTwo: Bus = new Bus("1", "111", 0, 0, 0, 0, (new Date()).toISOString(), "0");
+			var busThree: Bus = new Bus("10", "111", 0, 0, 0, 0, (new Date()).toISOString(), "0");
+		
+			busColletion.save(busOne);
+			busColletion.save(busTwo);
+			busColletion.save(busThree);
+	});
 	 
-	var platformId: string = "1";
-	var data: string = "1,10,565"
+	var platformId: number = 1;
+	var data: string = "1,10,565";
 	var ip : string = "0.0.0.0";
 	var port: string = "8080";
 	var route : string ="/v2/search/:platformId/:data";
 	var resources : Object = {"resources/v2/searchResource":route};
-	var address: string = "http://"+ip+":"+port+"/v2/search/platformId/data";
-	if(global.database == undefined) global.database = new DbContext(Config.environment.database);
+	var address: string = "http://"+ip+":"+port+"/v2/search/"+platformId+"/"+data;
+	
+	if(global.database == undefined) global.database = db;
+	
 
 
 	globalAnalytics = new MockAnalytics();
@@ -38,15 +58,15 @@ describe("SearchResource", () => {
 	
 	
 	it("should get a bus list", (done) =>{
-		var current: string;
-		var notExpected: string = "error";
-		
+		var notExpected: number = 0;
+		var current: number;
+
 		try{
 			var output: any = httpRequest.get(address).body;
-			current = output;
+			current = output.length;
 		}catch(e){
+			current = e;
 		}finally{
-			
 			Assert.notEqual(current, notExpected);
 			done();
 		}
