@@ -1,9 +1,6 @@
 .DS_Store
 node_modules
-.compiled
-dist
 .settings
 .idea
 *.log
-defs
-tmp
+.vscode

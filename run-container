@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run -it --rm -p 8080:8080 -p 80:80 --link mongo:mongo -v $(pwd):/app --name riobus-proxy riobus /bin/bash

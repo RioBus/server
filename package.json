@@ -1,16 +1,16 @@
 {
-  "name": "server",
-  "version": "3.2.0",
-  "description": "RioBus server application",
-  "main": ".compiled/src/index.js",
+  "name": "proxy",
+  "version": "4.0.0",
+  "description": "RioBus proxy application",
+  "main": "src/app.js",
   "scripts": {
-    "test": "gulp buildTest && mocha .compiled/test/**/* --timeout 10000",
-    "build": "gulp build",
-    "start": "gulp build && node .compiled/src/index.js"
+    "test": "mocha test/* test/**/*",
+    "start": "node src/app.js",
+    "install": "npm install -g mocha-co"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/riobus/server"
+    "url": "https://github.com/riobus/proxy"
   },
   "keywords": [
     "riobus",
@@ -27,29 +27,26 @@
     "wrapper",
     "infrastructure"
   ],
-  "author": "Fred Souza <fredericoamsouza@gmail.com> (http://fmsouza.github.io)",
-  "license": "http://github.com/RioBus/server/blob/master/LICENSE",
+  "license": "http://github.com/RioBus/proxy/blob/master/LICENSE",
   "bugs": {
-    "url": "http://github.com/RioBus/server/issues"
+    "url": "http://github.com/RioBus/proxy/issues"
   },
-  "homepage": "http://github.com/RioBus/server",
+  "homepage": "http://github.com/RioBus/proxy",
   "dependencies": {
-    "compression": "latest",
-    "deasync": "latest",
-    "emailjs": "latest",
-    "express": "latest",
-    "fs-extra": "latest",
-    "moment": "latest",
-    "moment-timezone": "latest",
-    "mongodb": "latest",
-    "nodealytics": "latest",
-    "request": "latest"
+    "body-parser": "1.14.1",
+    "co": "4.6.0",
+    "co-express": "1.2.1",
+    "compression": "1.5.2",
+    "express": "4.13.3",
+    "fs-extra": "0.26.0",
+    "moment": "2.10.6",
+    "moment-timezone": "0.4.1",
+    "mongodb": "1.4.4",
+    "nodealytics": "0.0.6",
+    "request-promise": "1.0.2",
+    "robe": "0.12.0"
   },
   "devDependencies": {
-    "gulp": "latest",
-    "gulp-load-plugins": "latest",
-    "gulp-typescript": "latest",
-    "gulp-util": "^3.0.6",
-    "mocha": "latest"
+    "mocha-co": "1.17.1-co.1"
   }
 }

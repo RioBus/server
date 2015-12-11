@@ -1,7 +1,7 @@
 RioBus
 ======
 
-[![Build Status](https://snap-ci.com/RioBus/proxy/branch/master/build_image)](https://snap-ci.com/RioBus/proxy/branch/master)
+[![Build Status](https://snap-ci.com/RioBus/proxy/branch/dev/build_image)](https://snap-ci.com/RioBus/proxy/branch/dev)
 
 O RioBus é um sistema colaborativo de monitoramento de ônibus em tempo real, que utiliza a API aberta de dados de
 mobilidade urbana fornecida pela parceria entre a Prefeitura do Rio de Janeiro e a FETRANSPOR.
@@ -11,7 +11,7 @@ Seu objetivo principal é ajudar o cidadão, seja ele morador ou visitante, do R
 Arquitetura
 -----------
 
-A aplicação do servidor do RioBus foi desenvolvida em TypeScript, através do GULP e Node.js junto ao ExpressJS, que é
+A aplicação do servidor do RioBus foi desenvolvida em Node.js junto ao ExpressJS, que é
 uma solução bastante madura de framework para construir uma RESTful API.
 
 A organização da lógica da aplicação segue a metodologia de desenvolvimento do DDD (Domain-Driven Design), que deixa o
@@ -21,8 +21,6 @@ Além disso, foi preparada uma infra-estrutura graças ao poder do GULP, um dos 
 atualmente por equipes de desenvolvimento de Javascript. Desta forma foi possível escrever um código limpo e sucinto que
 garante flexibilidade e modularidade.
 
-Além disso, o GULP compila o código do TypeScript em "Javascript comum" seguindo os padrões CommonJS, garantindo a
-compatibilidade com a plataforma do Node.js.
 
 
 Instalação
@@ -42,40 +40,25 @@ Faça o download do projeto em sua máquina:
 Entre na raiz do projeto e instale as dependências do Node.js:
 > $ npm install
 
-Ainda na raiz do projeto, configure o ambiente
-> $ npm run configure
-
 Execute a aplicação:
 > $ npm start
 
 Os dados dos ônibus são salvos no banco de dados NoSQL [MongoDB](https://www.mongodb.org/). Certifique-se de que ele 
-esteja ligado antes de executar a aplicação. As configurações de conexão devem ser definidas na classe ```Config```, 
-em ```Config.environment.<ambiente>.database```.
+esteja ligado antes de executar a aplicação. As configurações de conexão devem ser definidas no módulo ```config```, 
+em ```Config.database```.
 
 Comandos NPM
 ------------
-
-npm run configure
-> Configura o ambiente para compilação
-
-npm run build
-> Compila o projeto para JavaScript e põe o código em compiled/build/
 
 npm run test
 > Invoca o Mocha e roda as rotinas de testes unitários configurados em test/
 
 npm run start
-> Compila e roda a aplicação
-
-npm run release
-> Compila e gera um código comprimido para distribuição
-
-npm run deploy
-> Compila, gera o código de distribuição e executa a aplicação final
+> Roda a aplicação
 
 ```OBS.: Para a aplicação funcionar, ela precisa estar em um projeto cujos módulos Node.js estejam instalados.```
 
 Compatibilidade
 ---------------
 
-* nodejs >= 0.11
+* nodejs >= 4.0
